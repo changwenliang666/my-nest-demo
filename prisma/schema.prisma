@@ -1,0 +1,68 @@
+// prisma/schema.prisma
+
+// ══════════════════════════════════════════════════════════
+// 第一部分：generator（客户端生成配置）
+// ══════════════════════════════════════════════════════════
+// 告诉 Prisma 执行 prisma generate 时生成什么
+generator client {
+
+  // provider = "prisma-client" 是 Prisma 7 的新写法
+  // Prisma 6 是 "prisma-client-js"
+  // 区别：Prisma 7 用纯 JS 实现，不依赖 Rust 二进制文件
+  provider = "prisma-client"
+
+  // output 指定生成的 Client 代码放到哪里
+  // Prisma 7 必须指定，不再默认生成到 node_modules
+  // 路径相对于 schema.prisma 文件所在目录（prisma/）
+  // ../src/generated/prisma 相当于项目根目录的 src/generated/prisma
+  output = "../src/generated/prisma"
+
+  // moduleFormat 指定生成的代码格式
+  // "cjs" = CommonJS，NestJS 默认使用 CommonJS，必须写这行
+  // 如果不写，Prisma 7 默认生成 ESM 格式，NestJS 运行会报错
+  moduleFormat = "cjs"
+}
+
+// ══════════════════════════════════════════════════════════
+// 第二部分：datasource（数据库连接配置）
+// ══════════════════════════════════════════════════════════
+// 告诉 Prisma 使用什么数据库
+datasource db {
+
+  // provider 指定数据库类型
+  // 可选值：postgresql | mysql | sqlite | sqlserver | mongodb
+  provider = "postgresql"
+
+  // Prisma 7 变化：url 移到 prisma.config.ts 里配置
+  // 这里不再写 url = env("DATABASE_URL")
+  // datasource 块只保留 provider 即可
+}
+
+// ══════════════════════════════════════════════════════════
+// 第三部分：model（数据模型定义）
+// ══════════════════════════════════════════════════════════
+// 每个 model 对应数据库里的一张表
+model User {
+  // 字段名   数据类型   修饰符
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String    @unique
+  createdTime DateTime @default(now())
+  updatedTime DateTime @default(now()) @updatedAt
+  @@index([email])
+  @@index([name])
+  @@map("users")
+  articles Article[]
+}
+
+model Article {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  createdTime DateTime @default(now())
+  updatedTime DateTime @default(now()) @updatedAt
+  authorId Int
+  @@index([title])
+  @@map("articles")
+  user User @relation(fields: [authorId], references: [id])
+}
