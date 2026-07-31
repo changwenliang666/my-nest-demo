@@ -61,7 +61,7 @@ services:
     restart: always
     ports:
       # 对外暴露 80 端口（HTTP）
-      - "80:80"
+      - "8081:80"
       # 对外暴露 443 端口（HTTPS，后续配置 SSL 证书用）
       - "443:443"
     volumes:
