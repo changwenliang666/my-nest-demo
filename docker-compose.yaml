@@ -14,13 +14,9 @@ services:
     # 容器崩溃或服务器重启后自动重启（always = 始终重启）
     restart: always
     # 环境变量（从 .env.production 文件读取）
-    environment:
-      # 数据库超级用户名
-      POSTGRES_USER: ${POSTGRES_USER}
-      # 数据库超级用户密码
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      # 自动创建的默认数据库名
-      POSTGRES_DB: ${POSTGRES_DB}
+    .env_file:
+      - .env.production
+
     # 数据卷挂载：把数据库文件持久化到宿主机
     # 格式：宿主机路径或卷名:容器内路径
     volumes:
