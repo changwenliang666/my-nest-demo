@@ -27,7 +27,7 @@ services:
       - app-network
     # 健康检查：确认 PostgreSQL 真正可以接受连接后，NestJS 才启动
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nest-demo"]
       interval: 10s      # 每 10 秒检查一次
       timeout: 5s        # 超时时间
       retries: 5         # 失败后重试 5 次
