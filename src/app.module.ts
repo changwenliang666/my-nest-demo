@@ -12,9 +12,12 @@ import { MemoryModule } from './memory/memory.module';
 import { RagModule } from './rag/rag.module';
 import { WeatherDemoModule } from './weather-demo/weather-demo.module';
 import { RagdbModule } from './ragdb/ragdb.module';
+import { LanggraphModule } from './langgraph/langgraph.module';
+// import { LanggraphService } from './langgraph.service';
+// import { LanggraphController } from './langgraph.controller';
 
 @Module({
-  imports: [PrismaModule, UserModule, ArticleModule, ModelsModule, PromptsModule, ChainsModule, AgentsModule, MemoryModule, RagModule, WeatherDemoModule, RagdbModule],
+  imports: [PrismaModule, UserModule, ArticleModule, ModelsModule, PromptsModule, ChainsModule, AgentsModule, MemoryModule, RagModule, WeatherDemoModule, RagdbModule, LanggraphModule],
   controllers: [AppController],
   providers: [AppService],
 })
