@@ -1,10 +1,11 @@
 import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { LanggraphService } from './langgraph.service';
 import { ArticleService } from './article.service';
+import { ReactAgentService } from './react-agent.service';
 
 @Controller('langgraph')
 export class LanggraphController {
-    constructor(private readonly langgraphService: LanggraphService, private readonly articleService: ArticleService) {}
+    constructor(private readonly langgraphService: LanggraphService, private readonly articleService: ArticleService, private readonly reactAgentService: ReactAgentService) {}
     @Post('simple-chat')
     simpleChat(@Body() body: { message: string, threadId: string }) {
         return this.langgraphService.simpleChat(body.message, body.threadId);
@@ -17,5 +18,10 @@ export class LanggraphController {
     @Post('generate-article')
     generateArticle(@Body() body: { article: string }) {
         return this.articleService.generateArticle(body.article);
+    }
+
+    @Post('react-agent')
+    reactAgent(@Body() body: { message: string, threadId: string }) {
+        return this.reactAgentService.run(body.message, body.threadId);
     }
 }

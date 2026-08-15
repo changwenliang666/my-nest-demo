@@ -98,10 +98,6 @@ export class LanggraphService implements OnModuleInit {
         return historyMessages.messages.map(message => message.content).join('\n');
     }
 
-
-    async generateArticle(article: string) {
-      
-    }
     onModuleInit() {
         this.llm = new ChatOllama({
             model: config.ollama.chatModel,

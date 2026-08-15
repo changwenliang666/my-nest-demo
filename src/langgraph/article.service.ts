@@ -5,7 +5,7 @@ import { Annotation } from "@langchain/langgraph";
 import { SystemMessage, HumanMessage } from "@langchain/core/messages";
 import { StateGraph, START, END } from "@langchain/langgraph";
 
-
+//自定义文章摘要数据结构
 const articleAnnotation = Annotation.Root({
     article: Annotation<string>(),
     keywords: Annotation<string[]>({
