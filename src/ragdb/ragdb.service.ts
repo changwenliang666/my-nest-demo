@@ -30,7 +30,7 @@ export class RagdbService implements OnModuleInit, OnModuleDestroy {
         });
 
         this.pgPool = new Pool({
-            connectionString: process.env.DATABASE_URL,
+            connectionString: process.env.RAG_DATABASE_URL,
             // 让每条连接启动即为英文错误信息，兼容 LangChain 的 "already exists" 判断
             options: '-c lc_messages=C',
         });

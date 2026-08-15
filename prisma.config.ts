@@ -1,12 +1,13 @@
 // prisma.config.ts
 // 完整注释版
 
-// 必须放在第一行，加载 .env 文件里的环境变量
-// 这样 process.env.DATABASE_URL 才能读取到 .env 里的值
-import 'dotenv/config'
-
-// defineConfig 是 Prisma 7 提供的配置函数，有完整的 TypeScript 类型提示
+import { config as loadEnv } from 'dotenv'
+import { resolve } from 'path'
 import { defineConfig } from 'prisma/config'
+
+// Nest 项目里 .env 放在 src/.env；Prisma CLI 工作目录是项目根
+loadEnv({ path: resolve(__dirname, 'src/.env') })
+loadEnv({ path: resolve(__dirname, '.env') })
 
 export default defineConfig({
 
