@@ -18,15 +18,15 @@ export class RagdbService implements OnModuleInit, OnModuleDestroy {
     // 初始化大模型，向量模型，数据库连接
     async onModuleInit() {
         this.llm = new ChatOllama({
-            model: config.ollama.chatModel,
-            temperature: config.ollama.temperature,
-            baseUrl: config.ollama.host,
+            model: config.ollama.qwenModel.chatModel,
+            temperature: config.ollama.qwenModel.temperature,
+            baseUrl: config.ollama.qwenModel.host,
             think: false,
         });
 
         this.embeddings = new OllamaEmbeddings({
-            model: config.ollama.embedModel,
-            baseUrl: config.ollama.host,
+            model: config.ollama.qwenModel.embedModel,
+            baseUrl: config.ollama.qwenModel.host,
         });
 
         this.pgPool = new Pool({

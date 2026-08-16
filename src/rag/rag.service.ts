@@ -10,15 +10,15 @@ import { StringOutputParser } from '@langchain/core/output_parsers';
 @Injectable()
 export class RagService {
     private llm = new ChatOllama({
-        model: config.ollama.chatModel,
-        temperature: config.ollama.temperature,
-        baseUrl: config.ollama.host,
+        model: config.ollama.qwenModel.chatModel,
+        temperature: config.ollama.qwenModel.temperature,
+        baseUrl: config.ollama.qwenModel.host,
         think: false,
     })
 
     private embeddings = new OllamaEmbeddings({
-        model: config.ollama.embedModel,
-        baseUrl: config.ollama.host,
+        model: config.ollama.qwenModel.embedModel,
+        baseUrl: config.ollama.qwenModel.host,
     })
 
     // 内存向量库实例

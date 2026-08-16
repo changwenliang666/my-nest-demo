@@ -6,9 +6,9 @@ import { ChatOllama } from '@langchain/ollama';
 @Injectable()
 export class MemoryService {
     private llm = new ChatOllama({
-        model:config.ollama.chatModel,
-        temperature:config.ollama.temperature,
-        baseUrl:config.ollama.host,
+        model:config.ollama.qwenModel.chatModel,
+        temperature:config.ollama.qwenModel.temperature,
+        baseUrl:config.ollama.qwenModel.host,
         think:false,
     })
     private sessionMap = new Map<string,BaseMessage[]>();

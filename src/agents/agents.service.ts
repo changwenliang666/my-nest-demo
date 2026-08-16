@@ -8,9 +8,9 @@ import { AIMessage, HumanMessage, SystemMessage, ToolMessage } from '@langchain/
 @Injectable()
 export class AgentsService {
     private llm = new ChatOllama({
-        model:config.ollama.chatModel,
-        temperature:config.ollama.temperature,
-        baseUrl:config.ollama.host,
+        model:config.ollama.qwenModel.chatModel,
+        temperature:config.ollama.qwenModel.temperature,
+        baseUrl:config.ollama.qwenModel.host,
         think:false,
     })
 
